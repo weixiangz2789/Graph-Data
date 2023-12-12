@@ -8,7 +8,6 @@ async function getData() {
     const row = elem.split(",");
     const year = row[0];
     const temp = parseFloat(row[1]) + 14;
-    console.log(year, temp);
     labelArr.push(year);
     dataArr.push(temp);
   });
@@ -27,13 +26,29 @@ new Chart(ctx, {
         label: "Global Average Temperature",
         data: dataArr,
         borderWidth: 1,
+        borderColor: "#00FF00",
       },
     ],
   },
   options: {
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 40,
+          },
+        },
+      },
+    },
+
     scales: {
       y: {
         beginAtZero: false,
+        ticks: {
+          callback: function (value, index, ticks) {
+            return value + "°";
+          },
+        },
       },
     },
   },
